@@ -3,7 +3,16 @@
 import sys
 
 def making_change(amount, denominations):
-  pass 
+  cache = [0] * (amount + 1)
+  cache[0] = 1 
+  for select_coin_value in denominations:
+    for new_index in range(select_coin_value, amount+1):
+      ## adds info to cache system for each part of cents change
+      before_new_index = new_index - select_coin_value
+      # keeps building left over to get change value
+      cache[new_index] += cache[before_new_index]
+      print(cache[new_index])
+  return cache[amount]
 
 
 if __name__ == "__main__":
